@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Point calculator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="vue.min.js"></script>
+        <link rel="stylesheet" href="bulma.min.css" />        
+        <script defer src="all.js"></script>
+    </head>
+    <body>
+        <section class="section">
+            <div id="app" class="container">
+                <form role="form">
+                    <div class="field">
+                        <label class="label">Protéines</label>
+                        <div class="control">
+                            <input class="input" type="number" placeholder="0" v-model="proteins" @change="calculate">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Glucides</label>
+                        <div class="control">
+                            <input class="input" type="number" placeholder="0" v-model="glucides">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Lipides</label>
+                        <div class="control">
+                            <input class="input" type="number" placeholder="0" v-model="lipides">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Fibres</label>
+                        <div class="control">
+                            <input class="input" type="number" placeholder="0" v-model="fibres">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Poids en grammes</label>
+                        <div class="control">
+                            <input class="input" type="number" placeholder="poid en grammes" v-model="poid">
+                        </div>
+                    </div>
+                    <h2>Points pour {{poid}} g : {{points}}</h2>
+                </form>
+            </div>
+        </section>
+        <script type="text/javascript">
+var app = new Vue({
+    el: '#app',
+    data: {
+        proteins: 0,
+        glucides: 0,
+        lipides: 0,
+        fibres: 0,
+        poid: 100,
+        points: 0
+        },
+    watch: {
+        proteins: function() { this.calculate(); },
+        glucides: function() { this.calculate(); },
+        lipides: function() { this.calculate(); },
+        fibres: function() { this.calculate(); },
+        poid: function() { this.calculate(); } 
+    },
+    methods: {
+        calculate: function () {
+            this.points = Math.round((this.proteins / 11 + this.glucides / 9 + this.lipides / 4 + this.fibres / 30) * this.poid) / 100;
+        }
+    }
+});
+        </script>
+    </body>        
+</html>
